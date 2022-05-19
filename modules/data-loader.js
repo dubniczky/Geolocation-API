@@ -17,7 +17,7 @@ export function load(name) {
     // Validate ascii_name-s
     for (let c of data) {
         if (c['ascii_name'] == null) {
-            c['ascii_name'] = c['name'].replace(/[^\x00-\x7F]/g, "")
+            c['ascii_name'] = c['name'].replace(/[^\x00-\x7F]/g, '')
         }
     }
 
