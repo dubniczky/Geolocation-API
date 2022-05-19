@@ -18,3 +18,4 @@ rules:
   semi:
     - error
     - never
+  no-control-regex: off
