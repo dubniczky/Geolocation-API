@@ -14,7 +14,7 @@ container := geocity:api
 container_port_internal := 8080
 container_port_external := 80
 
-.PHONY: dev lint fix install start deploy container run
+.PHONY: dev lint fix test testwatch install start deploy container run
 
 # Start the application in development mode
 dev: $(main) $(modules)
@@ -32,6 +32,14 @@ lint: $(modules)
 # Fixes auto fixable linting errors
 fix: $(modules)
 	npx eslint . --fix
+
+# Runs tests using jest
+test: $(modules)
+	NODE_OPTIONS='--experimental-vm-modules' npx jest .
+
+# Runs tests in interactive mode using jest
+testwatch: $(modules)
+	NODE_OPTIONS='--experimental-vm-modules' npx jest . --watch
 
 # Install packages (development mode)
 install: package.json
