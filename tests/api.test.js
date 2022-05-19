@@ -70,3 +70,32 @@ describe('Endpoint: /random tests', () =>
 
     }, 1000)
 })
+
+// capital
+describe('Endpoint: /capital tests', () =>
+{
+    it('Accuracy: the capital of countries should be correct', async () => {
+        async function nameMatch(code, name) {
+            const res = await request(app).get('/api/v1/capital?code=' + code)
+            expect(res.status).toBe(200)
+            expect(res.body.ascii_name).toBe(name)
+            return res
+        }
+        
+        await nameMatch('hu', 'Budapest')
+        await nameMatch('us', 'Washington')
+        await nameMatch('gb', 'London')
+    })
+
+    it('Stability: non-existing country should return 404 status', async () => {
+        const res = await request(app).get('/api/v1/capital?code=xx')
+        
+        expect(res.status).toBe(404)
+    })
+
+    it('Validity: invalid query should return 400 status', async () => {
+        const res = await request(app).get('/api/v1/capital')
+        
+        expect(res.status).toBe(400)
+    })
+})
