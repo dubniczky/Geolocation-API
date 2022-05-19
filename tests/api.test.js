@@ -6,10 +6,14 @@ import app from 'geocity/server.js'
 describe('Endpoint: /locate tests', () =>
 {
     it('Accuracy: Given coordinates should return Budapest, Hungary', async () => {
-        const res = await request(app).get('/api/v1/locate?lat=	47.49836&lon=19.04044')
-        
-        expect(res.status).toBe(200)
-        expect(res.body.ascii_name).toBe('Budapest')
+        async function coordMatch(name, lat, lon) {
+            const res = await request(app).get(`/api/v1/locate?lat=${lat}&lon=${lon}`)        
+            expect(res.status).toBe(200)
+            expect(res.body.ascii_name).toBe(name)
+        }
+
+        await coordMatch('Budapest', '47.49836', '19.04044')
+        await coordMatch('Hurghada', '27.2642989', '33.8119766')
     })
 
     it('Consistency: two searches of the same location should return the same city', async () => {
@@ -19,6 +23,17 @@ describe('Endpoint: /locate tests', () =>
         expect(res1.status).toBe(200)
         expect(res2.status).toBe(200)
         expect(res1.body.ascii_name).toBe(res2.body.ascii_name)
+    })
+
+    it('Accuracy: searches should have the distance correct approx.', async () => {
+        async function distMatch(lat, lon, dist) {
+            const res = await request(app).get(`/api/v1/locate?lat=${lat}&lon=${lon}`)
+            expect(res.status).toBe(200)
+            expect(res.body.distance).toBeCloseTo(dist, 1)
+        }
+
+        await distMatch('36.4335641', '-9.8101592', 115.48)
+        await distMatch('47.49835', '19.04045', 0)
     })
 })
 
