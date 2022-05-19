@@ -1,5 +1,5 @@
-import app from 'sigma/server.js'
-import config from 'sigma/config.js'
+import app from 'geocity/server.js'
+import config from 'geocity/modules/config.js'
 
 // Start server
 app.listen(config.port, () => {
