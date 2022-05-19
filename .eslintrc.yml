@@ -18,4 +18,4 @@ rules:
   semi:
     - error
     - never
-  no-control-regex: off
+  no-control-regex: off # allow control character matching in regex
