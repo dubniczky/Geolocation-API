@@ -1,9 +1,9 @@
 import express from 'express'
 
-import config from 'sigma/modules/config.js'
+import config from 'geocity/modules/config.js'
 
-import debugRouter from 'sigma/routers/debug.router.js'
-import statusRouter from 'sigma/routers/status.router.js'
+import debugRouter from 'geocity/routers/debug.router.js'
+import statusRouter from 'geocity/routers/status.router.js'
 
 
 // Create server app
