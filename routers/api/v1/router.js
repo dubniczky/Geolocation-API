@@ -34,5 +34,11 @@ router.get('/search', async (req, res) => {
     return res.sendStatus(404)
 })
 
+router.get('/random', async (req, res) => {
+    const index = Math.floor(Math.random() * search.length)
+    
+    return res.send(cities[index])
+})
+
 
 export default router
