@@ -55,5 +55,23 @@ router.get('/random', async (req, res) => {
     return res.send(cities[index])
 })
 
+router.get('/capital', async (req, res) => {
+    let code = req.query.code
+
+    if (code == null) {
+        return res.sendStatus(400)
+    }
+
+    code = code.toUpperCase()
+
+    for (let c of cities) {
+        if (c['country_code'] == code && c['feature_code'] == 'PPLC') {
+            return res.send(c)
+        }
+    }
+
+    return res.sendStatus(404)
+})
+
 
 export default router
