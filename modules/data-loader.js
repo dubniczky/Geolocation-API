@@ -9,7 +9,7 @@ export function load(name) {
 
     // Print performance
     const stop = performance.now()
-    console.log('Loaded', data.length, 'items in', Number( ((stop-start)/1000).toFixed(2) ), 's') // Conv back to number for console highlight
+    console.log('Loaded', data.cities.length, 'items in', Number( ((stop-start)/1000).toFixed(2) ), 's') // Conv back to number for console highlight
 
     return data
 }
