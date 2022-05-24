@@ -12,7 +12,7 @@ export function cityDistance(lat, lon, cityIndex, cities) {
         cities[cityIndex].coordinates.lon)
 }
 
-export function findClosest(cities, lat, lon) {
+export function closestCity(cities, lat, lon) {
     let closestIndex = 0
     let dist = cityDistance(lat, lon, 0, cities)
 

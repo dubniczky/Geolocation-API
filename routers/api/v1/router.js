@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 import config from 'geocity/modules/config.js'
 import { load } from 'geocity/modules/data-loader.js'
-import { findClosest } from 'geocity/modules/distance.js'
+import { closestCity } from 'geocity/modules/distance.js'
 import { selectRandom } from 'geocity/modules/randtools.js'
 
 const conf = config.api.v1
@@ -21,7 +21,7 @@ router.get('/locate', async (req, res) => {
         return res.sendStatus(400)
     }
 
-    const closest = findClosest(cities, lat, lon)
+    const closest = closestCity(cities, lat, lon)
 
     return res.send(closest)
 })
@@ -56,7 +56,7 @@ router.get('/capital', async (req, res) => {
     code = code.toUpperCase()
 
     for (let c of cities) {
-        if (c.country_code == code && c.country_capital) {
+        if (c.country.code == code && c.country_capital) {
             return res.send(c)
         }
     }
