@@ -53,7 +53,7 @@ router.get('/search', async (req, res) => {
 })
 
 router.get('/random', async (req, res) => {
-    const index = Math.floor(Math.random() * search.length)
+    const index = Math.floor(Math.random() * cities.length)
     
     return res.send(cities[index])
 })
@@ -68,7 +68,7 @@ router.get('/capital', async (req, res) => {
     code = code.toUpperCase()
 
     for (let c of cities) {
-        if (c['country_code'] == code && c['feature_code'] == 'PPLC') {
+        if (c.country_code == code && c.country_capital) {
             return res.send(c)
         }
     }

@@ -8,6 +8,6 @@ export function cityDistance(lat, lon, cityIndex, cities) {
     return coordDistance(
         lat,
         lon,
-        cities[cityIndex]['coordinates'][0],
-        cities[cityIndex]['coordinates'][1])
+        cities[cityIndex].coordinates.lat,
+        cities[cityIndex].coordinates.lon)
 }
