@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 import config from 'geocity/modules/config.js'
 import { load } from 'geocity/modules/data-loader.js'
-import { cityDistance } from 'geocity/modules/coord-distance.js'
+import { findClosest } from 'geocity/modules/distance.js'
 import { selectRandom } from 'geocity/modules/randtools.js'
 
 const conf = config.api.v1
@@ -21,21 +21,9 @@ router.get('/locate', async (req, res) => {
         return res.sendStatus(400)
     }
 
-    let closestIndex = 0
-    let dist = cityDistance(lat, lon, 0, cities)
+    const closest = findClosest(cities, lat, lon)
 
-    for (let i in cities) {
-        let d = cityDistance(lat, lon, i, cities)
-        if (d < dist) {
-            dist = d
-            closestIndex = i
-        }
-    }
-
-    let city = { ... cities[closestIndex] }
-    city.distance = dist * 111
-
-    return res.send(city)
+    return res.send(closest)
 })
 
 router.get('/search', async (req, res) => {
