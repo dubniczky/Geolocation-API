@@ -2,7 +2,6 @@
 
 import yaml from 'js-yaml'
 import { readFileSync } from 'fs'
-import path from 'path'
 
 const config = yaml.load( readFileSync('preprocess.yml', 'utf8') )
 
@@ -16,38 +15,48 @@ for (let i in cities) {
     cities[i] = cities[i].fields
 }
 
-// Convert coords to key-value pairs
+// Update city data
 for (let c of cities) {
+    // Convert coords to key-value pairs
     const coords = c.coordinates
     c.coordinates = {
         lat: coords[0],
         lon: coords[1]
     }
-}
 
-// Add country fields
-for (let c of cities) {
+    // Add country fields
     c.country = {
         name: c.cou_name_en,
         code: c.country_code
     }
     delete c.cou_name_en
     delete c.country_code
-}
 
-// Add is capital
-for (let c of cities) {
+    // Add is capital
     c.country_capital = c.feature_code == 'PPLC'
-    c.state_capital = c.feature_code == 'PPLC'
+    c.state_capital = c.feature_code == 'PPLA'
 
-}
-
-// Validate ascii_name-s
-for (let c of cities) {
-    if (c['ascii_name'] == null) {
-        c['ascii_name'] = c['name'].replace(/[^\x00-\x7F]/g, '')
+    // Validate ascii_name-s
+    if (c.ascii_name == null) {
+        c.ascii_name = c.name.replace(/[^\x00-\x7F]/g, '')
     }
+
+    // Remove feature class (all of them are cities with P classification)
+    delete c.feature_class
+
+    // Make alternate names a list
+    if (c.alternate_names) {
+        c.alt_names = c.alternate_names.split(',')
+    }
+    else {
+        c.alt_names = []
+    }
+    delete c.alternate_names
+
+    // Rename some fields
+    c.elevation = c.dem; delete c.dem
 }
+
 
 // Print performance
 const stop = performance.now()
