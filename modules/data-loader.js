@@ -13,12 +13,3 @@ export function load(name) {
 
     return data
 }
-
-
-export function makeSearchList(cities) {
-    let list = []
-    for (let c of cities) {
-        list.push(c['ascii_name'].toLowerCase())
-    }
-    return list
-}

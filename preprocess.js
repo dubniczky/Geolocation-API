@@ -77,7 +77,3 @@ writeFileSync(config.out, JSON.stringify({
 // Print performance
 const stop = performance.now()
 console.log('Parsed ', cities.length, ' items in:', (stop-start)/1000, 's')
-
-export function makeSearchList(cities) {
-    
-}
