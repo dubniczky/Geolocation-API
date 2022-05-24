@@ -1,3 +1,0 @@
-cities:
-  in: data/cities.json
-  out: cities.temp.json

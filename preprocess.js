@@ -1,14 +1,17 @@
 // Prepares the city data for the api
 
 import yaml from 'js-yaml'
-import { readFileSync } from 'fs'
+import { readFileSync, writeFileSync } from 'fs'
 
-const config = yaml.load( readFileSync('preprocess.yml', 'utf8') )
+const config = {
+    in: process.argv[2],
+    out: process.argv[3],
+}
 
 // Read cities file
 const start = performance.now()
-console.log('Processing: ', config.cities.in)    
-const cities = yaml.load( readFileSync(config.cities.in, 'utf8') )
+console.log('Processing: ', config.in)    
+const cities = yaml.load( readFileSync(config.in, 'utf8') )
 
 // Extract fields only
 for (let i in cities) {
@@ -57,14 +60,14 @@ for (let c of cities) {
     c.elevation = c.dem; delete c.dem
 }
 
-
-// Print performance
-const stop = performance.now()
-console.log('Loaded ', cities.length, ' items in:', (stop-start)/1000, 's')
-
 // Print example
 console.log(cities[0])
 
+writeFileSync(config.out, JSON.stringify(cities))
+
+// Print performance
+const stop = performance.now()
+console.log('Parsed ', cities.length, ' items in:', (stop-start)/1000, 's')
 
 export function makeSearchList(cities) {
     let list = []

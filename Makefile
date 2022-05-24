@@ -13,11 +13,14 @@ deploy_args :=
 container := geocity:api
 container_port_internal := 8080
 container_port_external := 80
+# Data
+raw_data := data/cities.json
+temp_data := cities.temp.json
 
 .PHONY: dev lint fix test testwatch install start deploy container run
 
 # Start the application in development mode
-dev: $(main) $(modules)
+dev: $(main) $(modules) $(temp_data)
 	$(devnode) $(debug_args) $(main)
 
 # Run compile test and eslint
@@ -46,7 +49,7 @@ install: package.json
 	$(pm) install
 
 # Start the application in deployment mode
-start: $(modules)
+start: $(modules) $(temp_data)
 	$(depnode) $(deploy_args) $(main)
 
 # Install packages (deployment mode)
@@ -64,11 +67,17 @@ run:
 	@echo "Starting continer.. ($(container))"
 	@sudo docker run -p$(container_port_external):$(container_port_internal) $(container)
 
+# Preprocess required in-memory data for the api
 prep:
-	node preprocess
+	node preprocess $(raw_data) $(temp_data)
 
 
 # Auto install packages dependency
 $(modules): package.json
 	@echo "Dependency inconsistency found, updating.."
 	$(MAKE) -s install
+
+# Auto prepare city list
+$(temp_data): $(raw_data)
+	@echo "Processed data out of date, updating.."
+	@$(MAKE) -s prep
