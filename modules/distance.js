@@ -2,7 +2,7 @@ function rad(deg) {
     return deg * (Math.PI/180)
 }
 
-// Calculate distane of two coordinates and convert to kilometers using the Haversine formula
+// Calculate distance of two coordinates in kilometers using the Haversine formula
 // https://en.wikipedia.org/wiki/Haversine_formula
 function distanceToKM(a_lat, a_lon, b_lat, b_lon) {
     const sin = Math.sin
