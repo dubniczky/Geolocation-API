@@ -1,4 +1,3 @@
-import yaml from 'js-yaml'
 import { readFileSync } from 'fs'
 
 
@@ -6,7 +5,7 @@ export function load(name) {
     const start = performance.now()
     console.log('Loading:', name)
     
-    const data = yaml.load( readFileSync(name, 'utf8') )
+    const data = JSON.parse( readFileSync(name, 'utf8') )
 
     // Print performance
     const stop = performance.now()
