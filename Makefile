@@ -17,7 +17,7 @@ container_port_external := 80
 raw_data := data/cities.json
 temp_data := databundle.temp.json
 
-.PHONY: dev lint fix test testwatch install start deploy container run
+.PHONY: dev lint fix test testwatch install start deploy container run prep
 
 # Start the application in development mode
 dev: $(main) $(modules) $(temp_data)
