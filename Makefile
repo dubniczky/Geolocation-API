@@ -64,6 +64,9 @@ run:
 	@echo "Starting continer.. ($(container))"
 	@sudo docker run -p$(container_port_external):$(container_port_internal) $(container)
 
+prep:
+	node preprocess
+
 
 # Auto install packages dependency
 $(modules): package.json
