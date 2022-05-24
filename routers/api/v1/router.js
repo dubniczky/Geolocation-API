@@ -1,7 +1,9 @@
 import { Router } from 'express'
-import { load } from 'geocity/modules/data-loader.js'
+
 import config from 'geocity/modules/config.js'
+import { load } from 'geocity/modules/data-loader.js'
 import { cityDistance } from 'geocity/modules/coord-distance.js'
+import { selectRandom } from 'geocity/modules/randtools.js'
 
 const conf = config.api.v1
 const data = load(conf.databundle)
@@ -53,9 +55,7 @@ router.get('/search', async (req, res) => {
 })
 
 router.get('/random', async (req, res) => {
-    const index = Math.floor(Math.random() * cities.length)
-    
-    return res.send(cities[index])
+    return res.send( selectRandom(cities) )
 })
 
 router.get('/capital', async (req, res) => {
