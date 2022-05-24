@@ -15,7 +15,7 @@ container_port_internal := 8080
 container_port_external := 80
 # Data
 raw_data := data/cities.json
-temp_data := cities.temp.json
+temp_data := databundle.temp.json
 
 .PHONY: dev lint fix test testwatch install start deploy container run
 

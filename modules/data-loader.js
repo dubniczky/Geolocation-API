@@ -1,29 +1,16 @@
 import yaml from 'js-yaml'
 import { readFileSync } from 'fs'
-import path from 'path'
 
 
 export function load(name) {
     const start = performance.now()
-    const fpath = path.join('data', name)
-    console.log('Loading: ', fpath)    
-    const data = yaml.load( readFileSync(fpath, 'utf8') )
-
-    // Extract fields only
-    for (let i in data) {
-        data[i] = data[i].fields
-    }
-
-    // Validate ascii_name-s
-    for (let c of data) {
-        if (c['ascii_name'] == null) {
-            c['ascii_name'] = c['name'].replace(/[^\x00-\x7F]/g, '')
-        }
-    }
+    console.log('Loading:', name)
+    
+    const data = yaml.load( readFileSync(name, 'utf8') )
 
     // Print performance
     const stop = performance.now()
-    console.log('Loaded ', data.length, ' items in:', (stop-start)/1000, 's')
+    console.log('Loaded', data.length, 'items in', Number( ((stop-start)/1000).toFixed(2) ), 's') // Conv back to number for console highlight
 
     return data
 }

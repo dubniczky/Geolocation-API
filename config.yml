@@ -1,2 +1,5 @@
 port: 8080
 debug: true
+api:
+  v1:
+    databundle: databundle.temp.json

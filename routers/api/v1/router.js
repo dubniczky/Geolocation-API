@@ -1,10 +1,13 @@
 import { Router } from 'express'
-import { load, makeSearchList } from 'geocity/modules/data-loader.js'
+import { load } from 'geocity/modules/data-loader.js'
+import config from 'geocity/modules/config.js'
 import { cityDistance } from 'geocity/modules/coord-distance.js'
 
+const conf = config.api.v1
+const data = load(conf.databundle)
+const cities = data.cities
+const search = data.searchList
 
-const cities = load('cities.json')
-const search = makeSearchList(cities)
 const router = Router()
 
 
