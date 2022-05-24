@@ -4,7 +4,7 @@ import config from 'geocity/modules/config.js'
 
 import debugRouter from 'geocity/routers/debug.router.js'
 import statusRouter from 'geocity/routers/status.router.js'
-import apiRouter from 'geocity/routers/api/v1/router.js'
+import apiRouter from 'geocity/routers/api.router.js'
 
 
 // Create server app

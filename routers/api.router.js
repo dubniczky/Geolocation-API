@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { router as v1 } from 'geocity/routers/api/v1/router.js'
+import v1 from 'geocity/routers/api/v1/router.js'
 
 const router = Router()
 
