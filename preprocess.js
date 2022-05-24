@@ -63,7 +63,9 @@ for (let c of cities) {
 // Print example
 console.log(cities[0])
 
-writeFileSync(config.out, JSON.stringify(cities))
+writeFileSync(config.out, JSON.stringify({
+    cities: cities
+}))
 
 // Print performance
 const stop = performance.now()
