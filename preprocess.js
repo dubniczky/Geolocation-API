@@ -63,8 +63,15 @@ for (let c of cities) {
 // Print example
 console.log(cities[0])
 
+// Create search list
+let search = []
+for (let c of cities) {
+    search.push(c['ascii_name'].toLowerCase())
+}
+
 writeFileSync(config.out, JSON.stringify({
-    cities: cities
+    cities: cities,
+    search: search
 }))
 
 // Print performance
@@ -72,9 +79,5 @@ const stop = performance.now()
 console.log('Parsed ', cities.length, ' items in:', (stop-start)/1000, 's')
 
 export function makeSearchList(cities) {
-    let list = []
-    for (let c of cities) {
-        list.push(c['ascii_name'].toLowerCase())
-    }
-    return list
+    
 }

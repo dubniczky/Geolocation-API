@@ -6,7 +6,7 @@ import { cityDistance } from 'geocity/modules/coord-distance.js'
 const conf = config.api.v1
 const data = load(conf.databundle)
 const cities = data.cities
-const search = data.searchList
+const search = data.search
 
 const router = Router()
 
