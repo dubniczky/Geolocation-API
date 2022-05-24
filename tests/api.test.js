@@ -33,7 +33,7 @@ describe('Endpoint: /locate tests', () =>
             expect(res.body.distance).toBeCloseTo(dist, 1)
         }
 
-        await distMatch('36.4335641', '-9.8101592', 115.48)
+        await distMatch('36.4335641', '-9.8101592', 100.3)
         await distMatch('47.49835', '19.04045', 0)
     })
 })
