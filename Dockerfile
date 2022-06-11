@@ -10,6 +10,9 @@ COPY . .
 # Install dependencies
 RUN make deploy
 
+# Create databundle
+RUN make prep
+
 # On start
 ENTRYPOINT [ "make" ]
 CMD [ "start" ]
