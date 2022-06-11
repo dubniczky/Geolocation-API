@@ -60,12 +60,12 @@ deploy: $(lockfile)
 # Create container
 container:
 	@echo "Building container.. ($(container))"
-	@sudo docker build -t $(container) .
+	@docker build -t $(container) .
 
 # Run container
 run:
 	@echo "Starting continer.. ($(container))"
-	@sudo docker run -p$(container_port_external):$(container_port_internal) $(container)
+	@docker run -p$(container_port_external):$(container_port_internal) $(container)
 
 # Preprocess required in-memory data for the api
 prep:
