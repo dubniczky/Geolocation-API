@@ -1,0 +1,15 @@
+# This is a docker compose file for NodeJS server deployments
+# Project: https://gitlab.com/richardnagy/container-environments/server-deployments
+
+version: '3'
+services:
+
+  geoapi:
+    container_name: geoapi
+    hostname: geoapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 80:8080
+    restart: unless-stopped

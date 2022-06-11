@@ -71,6 +71,14 @@ run:
 prep:
 	node preprocess $(raw_data) $(temp_data)
 
+# Start: using docker compose
+compose: compose.yml Dockerfile
+	docker-compose up --build
+
+# Start daemon using docker compose
+composed: compose.yml Dockerfile
+	docker-compose up -d
+
 
 # Auto install packages dependency
 $(modules): package.json
